@@ -45,27 +45,32 @@ function operate(num1,num2,operator) {
             display.textContent = add(num1,num2);
             displayValue = add(num1,num2);
             pressed = true;
-            console.log(num1,num2,operator);
+            console.log(num1,operator,num2);
+            numero1 = displayValue;
         break;
         
         case "-":
             display.textContent = sub(num1,num2);
             displayValue = sub(num1,num2);
             pressed = true;
-            console.log(num1,num2,operator);
-            //lastValue = sub(num1,num2);
+            console.log(num1,operator,num2);
+            numero1 = displayValue;
         break;
         
         case "*":
             display.textContent = multiply(num1,num2);
             displayValue = multiply(num1,num2);
             pressed = true;
+            console.log(num1,operator,num2);
+            numero1 = displayValue;
         break;
 
         case "/":
             display.textContent =  divide(num1,num2);
             displayValue = divide(num1,num2);
             pressed = true; 
+            console.log(num1,operator,num2);
+            numero1 = displayValue;
         break;
     }
 }
@@ -75,11 +80,13 @@ function showInDisplay(character) {
         case false:
             displayValue += character;
             display.textContent += character;
+            numero1 = displayValue;
         break;
         case true:
             displayValue = character;
             display.textContent = character;
             pressed = false;
+            numero2 = displayValue;
         break;
     }
 }
@@ -87,14 +94,14 @@ function showInDisplay(character) {
 
 
 function operatorPressed (button) {
-    lastValue = displayValue;
+    //lastValue = displayValue;
     operator = button;
     pressed = true;
 
 }
 
 //buttons
-equalButton.addEventListener("click", (e) =>operate(lastValue,displayValue,operator));
+equalButton.addEventListener("click", (e) =>operate(numero1,numero2,operator));
 zero.addEventListener("click", (e) => showInDisplay("0"));
 one.addEventListener("click", (e) => showInDisplay("1"));
 two.addEventListener("click", (e) => showInDisplay("2"));
