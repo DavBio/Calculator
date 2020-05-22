@@ -22,9 +22,12 @@ let displayValue = "";
 let operator = "";
 let lastValue = "";
 let pressed = false;
+let numero1, numero2;
+let equalPressed = false;
 
 function add (x,y) {
-    return Number(x) + Number(y);
+    if (x === "0.") {x = 0}
+    return parseFloat(x) + parseFloat(y);
 }
 
 function sub (x,y) {
@@ -32,14 +35,17 @@ function sub (x,y) {
 }
 
 function multiply (x,y) {
+    if (x === "0.") {x = 0}
     return x * y;
 }
 
 function divide (x,y) {
+    if (x === "0.") {x = 0}
     return x / y;
 }
 
 function operate(num1,num2,operator) {
+   equalPressed = true;
     switch(operator){
         case "+":
             display.textContent = add(num1,num2);
@@ -47,6 +53,7 @@ function operate(num1,num2,operator) {
             pressed = true;
             console.log(num1,operator,num2);
             numero1 = displayValue;
+            
         break;
         
         case "-":
@@ -76,17 +83,27 @@ function operate(num1,num2,operator) {
 }
 
 function showInDisplay(character) {
+   
     switch(pressed) {
         case false:
             displayValue += character;
+            console.log(displayValue);
             display.textContent += character;
             numero1 = displayValue;
         break;
         case true:
-            displayValue = character;
-            display.textContent = character;
-            pressed = false;
-            numero2 = displayValue;
+            
+            if (equalPressed === true) { 
+                displayValue = "";
+                display.textContent ="";
+                displayValue += character;
+                display.textContent += character;
+                pressed = false;
+                equalPressed = false;
+            } else {
+                displayValue += character;
+                display.textContent += character;numero2 = displayValue
+            };
         break;
     }
 }
@@ -97,11 +114,28 @@ function operatorPressed (button) {
     //lastValue = displayValue;
     operator = button;
     pressed = true;
+    equalPressed = false;
+    displayValue = "";
+    display.textContent= "";
 
 }
 
+function dotPressed() {
+  
+    if (Number.isInteger(Number(displayValue))){
+        if (displayValue === ""){
+        displayValue +="0.";
+        display.textContent += "0.";
+        } else {
+        displayValue +=".";
+        display.textContent += ".";
+        }
+    }
+  
+}
+let result;
 //buttons
-equalButton.addEventListener("click", (e) =>operate(numero1,numero2,operator));
+equalButton.addEventListener("click", (e) => operate(numero1,numero2,operator));
 zero.addEventListener("click", (e) => showInDisplay("0"));
 one.addEventListener("click", (e) => showInDisplay("1"));
 two.addEventListener("click", (e) => showInDisplay("2"));
@@ -117,3 +151,6 @@ addButton.addEventListener("click", (e) => operatorPressed("+"));
 subtractButton.addEventListener("click", (e) => operatorPressed("-"));
 multiplyButton.addEventListener("click", (e) => operatorPressed("*"));
 divideButton.addEventListener("click", (e) => operatorPressed("/"));
+
+dotButton.addEventListener("click", (e)=> dotPressed());
+
