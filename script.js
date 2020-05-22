@@ -100,9 +100,11 @@ function showInDisplay(character) {
                 display.textContent += character;
                 pressed = false;
                 equalPressed = false;
+                numero1 = displayValue;
             } else {
                 displayValue += character;
-                display.textContent += character;numero2 = displayValue
+                display.textContent += character;
+                numero2 = displayValue
             };
         break;
     }
@@ -111,7 +113,6 @@ function showInDisplay(character) {
 
 
 function operatorPressed (button) {
-    //lastValue = displayValue;
     operator = button;
     pressed = true;
     equalPressed = false;
@@ -119,16 +120,19 @@ function operatorPressed (button) {
     display.textContent= "";
 
 }
-
+ 
+//bug 2: algumas operações com o . retornam numeros milesimos abaixo do resultado real.
 function dotPressed() {
-  
+    if (equalPressed === true) { 
+        displayValue ="";
+        display.textContent ="";
+    }
+    
     if (Number.isInteger(Number(displayValue))){
         if (displayValue === ""){
-        displayValue +="0.";
-        display.textContent += "0.";
+        showInDisplay("0.");
         } else {
-        displayValue +=".";
-        display.textContent += ".";
+        showInDisplay(".");
         }
     }
   
