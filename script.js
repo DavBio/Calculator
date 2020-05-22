@@ -20,7 +20,6 @@ const delButton = document.querySelector("#del");
 const display = document.querySelector("#display");
 let displayValue = "";
 let operator = "";
-let lastValue = "";
 let pressed = false;
 let numero1, numero2;
 let equalPressed = false;
