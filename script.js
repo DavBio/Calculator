@@ -17,6 +17,7 @@ const dotButton = document.querySelector("#dot");
 const equalButton = document.querySelector("#equal");
 const delButton = document.querySelector("#del");
 const display = document.querySelector("#display");
+const historyDisplay = document.querySelector('#historyDisplay');
 let displayValue = "";
 let operator = "";
 let pressed = false;
@@ -89,6 +90,9 @@ function operate(num1,num2,operator) {
             history1 = displayValue;
         break;
     }
+    if (operator !== undefined) {
+        historyDisplay.textContent = `${num1} ${operator} ${num2} = `;
+    }
 }
 
 function showInDisplay(character) {
@@ -124,8 +128,10 @@ function operatorPressed (button) {
     operator = button;
     pressed = true;
     equalPressed = false;
+    historyDisplay.textContent=`${history1} ${button} `;
     displayValue = "";
     display.textContent= "";
+    
 
 }
  
@@ -170,8 +176,11 @@ function clearAll() {
     display.textContent = "";
     history1 = "";
     history2 = undefined;
+    historyDisplay.textContent = "";
     pressed = false;
     equalPressed = false;
+    operator = undefined;
+    
 }
 
 function equalPress() {
