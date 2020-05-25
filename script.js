@@ -21,7 +21,8 @@ const historyDisplay = document.querySelector('#historyDisplay');
 let displayValue = "";
 let operator = "";
 let pressed = false;
-let history1, history2;
+let history1= 0;
+let history2;
 let equalPressed = false;
 
 function add (x,y) {
@@ -104,7 +105,7 @@ function showInDisplay(character) {
             history1 = displayValue;
         break;
         case true:
-            
+    
             if (equalPressed === true) { 
                 displayValue = "";
                 display.textContent ="";
@@ -125,6 +126,7 @@ function showInDisplay(character) {
 
 
 function operatorPressed (button) {
+   
     operator = button;
     pressed = true;
     equalPressed = false;
@@ -174,7 +176,7 @@ function deleteLast() {
 function clearAll() {
     displayValue = "";
     display.textContent = "";
-    history1 = "";
+    history1 = 0;
     history2 = undefined;
     historyDisplay.textContent = "";
     pressed = false;
