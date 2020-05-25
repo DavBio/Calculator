@@ -41,10 +41,9 @@ function sub (x,y) {
 }
 
 function multiply (x,y) {
-    console.log(x,y);
+   
     let result = x * y;
-    console.log(x,y);
-    if (result.toString().length > 10) {return result.toPrecision(10);
+     if (result.toString().length > 10) {return result.toPrecision(10);
     } else {return result} 
 }
 
@@ -59,8 +58,9 @@ function operate(num1,num2,operator) {
 
     switch(operator){
         case "+":
-            display.textContent = add(num1,num2);
-            displayValue = add(num1,num2);
+            result = delRightZero(add(num1,num2));
+            display.textContent = result;
+            displayValue = result;
             pressed = true;
             
             history1 = displayValue;
@@ -68,24 +68,27 @@ function operate(num1,num2,operator) {
         break;
         
         case "-":
-            display.textContent = sub(num1,num2);
-            displayValue = sub(num1,num2);
+            result = delRightZero(sub(num1,num2));
+            display.textContent = result;
+            displayValue = result;
             pressed = true;
             
             history1 = displayValue;
         break;
         
         case "*":
-            display.textContent = multiply(num1,num2);
-            displayValue = multiply(num1,num2);
+            result = delRightZero(multiply(num1,num2));
+            display.textContent = result;
+            displayValue = result;
             pressed = true;
             
             history1 = displayValue;
         break;
 
         case "/":
-            display.textContent =  divide(num1,num2);
-            displayValue = divide(num1,num2);
+            result = delRightZero(divide(num1,num2));
+            display.textContent = result;
+            displayValue = result;
             pressed = true; 
             
             history1 = displayValue;
@@ -191,6 +194,22 @@ function equalPress() {
     operate(history1,history2,operator);
 }
 
+function delRightZero(result) {
+    let  string = result.toString();
+    if (string.includes(".")) {
+        let array = string.split("");
+        for (i = 0; array.lastIndexOf("0") === array.length-1; i++) {
+            switch(array.lastIndexOf("0")) {
+                case array.length-1:
+                    array.pop();
+                break;
+            
+            }
+        }
+        return array.join("");
+    } 
+   
+}
 //buttons
 equalButton.addEventListener("click", (e) => equalPress());
 zero.addEventListener("click", (e) => showInDisplay("0"));
