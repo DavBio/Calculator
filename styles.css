@@ -25,9 +25,10 @@
 }
 button{
     width:100%;
-    background-color: gray;
+    background-color: #848689;
     font-size: larger;
     border: white solid 0.1em;
+    color:white;
 }
 #one {
     grid-area: one;
@@ -40,8 +41,7 @@ button{
 }
 #add {
     grid-area: add;
-    background-color: black;
-    color: whitesmoke;
+    background-color: #5B676D;
 }
 #dot {
     grid-area: dot;
@@ -51,8 +51,7 @@ button{
 }
 #equal {
     grid-area: equal;
-    background-color: black;
-    color: whitesmoke;
+    background-color:#5B676D;
 }
 #four {
     grid-area: four;
@@ -65,8 +64,7 @@ button{
 }
 #subtract {
     grid-area:subtract;
-    background-color: black;
-    color: whitesmoke;
+    background-color:#5B676D;
 }
 #seven{
     grid-area:seven;
@@ -79,19 +77,19 @@ button{
 }
 #multiply {
     grid-area:multiply;
-    background-color: black;
-    color: whitesmoke;
+    background-color: #5B676D;
 }
 #ac {
     grid-area:ac;
+    background-color: #5B676D;
 }
 #del {
     grid-area:del;
+    background-color: #5B676D;
 }
 #divide{
     grid-area:divide;
-    background-color: black;
-    color: whitesmoke;
+    background-color:#5B676D;
 }
 #display {
     grid-area: display;
@@ -99,11 +97,12 @@ button{
     margin:0;
     text-align: right;
     padding-top:1em;
+    background-color:#1F262A;
 }
 #historyDisplay {
     grid-area: historyDisplay;
     font-size: small;
-    color: rgb(255,255,255, 0.7);
+    background-color: #1F262A;
     margin:0;
     text-align: right;
 }
