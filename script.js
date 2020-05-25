@@ -16,42 +16,52 @@ const clearButton = document.querySelector("#ac");
 const dotButton = document.querySelector("#dot");
 const equalButton = document.querySelector("#equal");
 const delButton = document.querySelector("#del");
-
 const display = document.querySelector("#display");
 let displayValue = "";
 let operator = "";
 let pressed = false;
-let numero1, numero2;
+let history1, history2;
 let equalPressed = false;
 
 function add (x,y) {
-    if (x === "0.") {x = 0}
-    return parseFloat(x) + parseFloat(y);
+    
+    let result = parseFloat(x) + parseFloat(y);
+    if (result.toString().length > 10) {return result.toPrecision(10);
+    } else {return result} 
+    
 }
 
 function sub (x,y) {
-    return x - y;
+    
+    let result = x - y;
+    if (result.toString().length > 10) {return result.toPrecision(10);
+    } else {return result} 
 }
 
 function multiply (x,y) {
-    if (x === "0.") {x = 0}
-    return x * y;
+    console.log(x,y);
+    let result = x * y;
+    console.log(x,y);
+    if (result.toString().length > 10) {return result.toPrecision(10);
+    } else {return result} 
 }
 
 function divide (x,y) {
-    if (x === "0.") {x = 0}
-    return x / y;
+    
+    let result = x / y;
+    if (result.toString().length > 10) {return result.toPrecision(10);
+    } else {return result} 
 }
 
 function operate(num1,num2,operator) {
-   equalPressed = true;
+
     switch(operator){
         case "+":
             display.textContent = add(num1,num2);
             displayValue = add(num1,num2);
             pressed = true;
-            console.log(num1,operator,num2);
-            numero1 = displayValue;
+            
+            history1 = displayValue;
             
         break;
         
@@ -59,24 +69,24 @@ function operate(num1,num2,operator) {
             display.textContent = sub(num1,num2);
             displayValue = sub(num1,num2);
             pressed = true;
-            console.log(num1,operator,num2);
-            numero1 = displayValue;
+            
+            history1 = displayValue;
         break;
         
         case "*":
             display.textContent = multiply(num1,num2);
             displayValue = multiply(num1,num2);
             pressed = true;
-            console.log(num1,operator,num2);
-            numero1 = displayValue;
+            
+            history1 = displayValue;
         break;
 
         case "/":
             display.textContent =  divide(num1,num2);
             displayValue = divide(num1,num2);
             pressed = true; 
-            console.log(num1,operator,num2);
-            numero1 = displayValue;
+            
+            history1 = displayValue;
         break;
     }
 }
@@ -86,9 +96,8 @@ function showInDisplay(character) {
     switch(pressed) {
         case false:
             displayValue += character;
-            console.log(displayValue);
             display.textContent += character;
-            numero1 = displayValue;
+            history1 = displayValue;
         break;
         case true:
             
@@ -99,11 +108,11 @@ function showInDisplay(character) {
                 display.textContent += character;
                 pressed = false;
                 equalPressed = false;
-                numero1 = displayValue;
+                history1 = displayValue;
             } else {
                 displayValue += character;
                 display.textContent += character;
-                numero2 = displayValue
+                history2 = displayValue
             };
         break;
     }
@@ -120,7 +129,7 @@ function operatorPressed (button) {
 
 }
  
-//bug 2: algumas operações com o . retornam numeros milesimos abaixo do resultado real.
+//bug: floating point math 
 function dotPressed() {
     if (equalPressed === true) { 
         displayValue ="";
@@ -136,9 +145,43 @@ function dotPressed() {
     }
   
 }
-let result;
+
+function deleteLast() {
+  let deleted = displayValue.toString().slice(0,displayValue.toString().length -1);
+  displayValue = deleted;
+  display.textContent = deleted;
+  switch(pressed) {
+    case false:
+        history1 = displayValue;
+    break;
+    case true:
+        
+        if (equalPressed === true) { 
+            history1 = displayValue;
+        } else {
+            history2 = displayValue;
+        };
+    break;
+}
+}
+
+function clearAll() {
+    displayValue = "";
+    display.textContent = "";
+    history1 = "";
+    history2 = undefined;
+    pressed = false;
+    equalPressed = false;
+}
+
+function equalPress() {
+    if(history2 === undefined) { history2 = history1;};
+    equalPressed = true;
+    operate(history1,history2,operator);
+}
+
 //buttons
-equalButton.addEventListener("click", (e) => operate(numero1,numero2,operator));
+equalButton.addEventListener("click", (e) => equalPress());
 zero.addEventListener("click", (e) => showInDisplay("0"));
 one.addEventListener("click", (e) => showInDisplay("1"));
 two.addEventListener("click", (e) => showInDisplay("2"));
@@ -157,3 +200,5 @@ divideButton.addEventListener("click", (e) => operatorPressed("/"));
 
 dotButton.addEventListener("click", (e)=> dotPressed());
 
+del.addEventListener("click", (e) => deleteLast());
+clearButton.addEventListener("click", (e) => clearAll());
