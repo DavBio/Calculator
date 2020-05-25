@@ -206,9 +206,9 @@ function delRightZero(result) {
             
             }
         }
-        return array.join("");
+        return Number(array.join(""));
     } 
-   
+   return result;
 }
 //buttons
 equalButton.addEventListener("click", (e) => equalPress());
