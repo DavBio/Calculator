@@ -1,3 +1,9 @@
+@media only screen and (min-width: 900px) {
+    #container {
+        max-width: 500px ;
+        margin:auto;
+    }
+}
 #container {
     display:grid;
     width: 100%;
@@ -12,9 +18,15 @@
      "dot zero equal equal";
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    background-color: black;
+    color: white;
+    
 }
 button{
     width:100%;
+    background-color: gray;
+    font-size: larger;
+    border: white solid 0.1em;
 }
 #one {
     grid-area: one;
@@ -27,6 +39,8 @@ button{
 }
 #add {
     grid-area: add;
+    background-color: black;
+    color: whitesmoke;
 }
 #dot {
     grid-area: dot;
@@ -36,6 +50,8 @@ button{
 }
 #equal {
     grid-area: equal;
+    background-color: black;
+    color: whitesmoke;
 }
 #four {
     grid-area: four;
@@ -48,6 +64,8 @@ button{
 }
 #subtract {
     grid-area:subtract;
+    background-color: black;
+    color: whitesmoke;
 }
 #seven{
     grid-area:seven;
@@ -60,6 +78,8 @@ button{
 }
 #multiply {
     grid-area:multiply;
+    background-color: black;
+    color: whitesmoke;
 }
 #ac {
     grid-area:ac;
@@ -69,7 +89,10 @@ button{
 }
 #divide{
     grid-area:divide;
+    background-color: black;
+    color: whitesmoke;
 }
 #display {
     grid-area: display;
+    font-size: x-large;
 }
